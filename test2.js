@@ -5,18 +5,13 @@ var LEDPIN = 8;
 var THMPIN = "A0";
  
 board.on("ready", function(){
-  console.log("started this");
-  
   var led = new j5.Led(LEDPIN);
   var thm = new j5.Sensor({ pin: THMPIN, freq: 500 });
   var currentTemp;
-
-  console.log("here 1"); 
+ 
   thm.on("change",  function(err, thmVoltage){
-    console.log("here 2");
     currentTemp = convertVoltToTemp(thmVoltage);
-    
-    console.log("Current TempF: ", currentTemp.tempF);
+    console.log("Temp in F: ", currentTemp.tempF); 
     // do stuff w/ the temperature, here
   });
  
