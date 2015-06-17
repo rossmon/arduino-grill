@@ -5,6 +5,8 @@ var LEDPIN = 8;
 var THMPIN = "A0";
  
 board.on("ready", function(){
+  console.log("started this");
+  
   var led = new j5.Led(LEDPIN);
   var thm = new j5.Sensor({ pin: THMPIN, freq: 500 });
   var currentTemp;
