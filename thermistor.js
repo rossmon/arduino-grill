@@ -1,26 +1,46 @@
 var j5 = require("johnny-five");
 var board = new j5.Board();
  
-var LEDPIN = 8;
-var THMPIN = "A0";
+var PROBE1LED = 8;
+var PROBE1 = "A0";
+var PROBE2LED = 9;
+var PROBE2 = "A1";
 
 board.on("ready", function(){
-  var led = new j5.Led(LEDPIN);
-  var thm = new j5.Sensor({ pin: THMPIN, freq: 500 });
+  var led1 = new j5.Led(PROBE1LED);
+  var probe1 = new j5.Sensor({ pin: PROBE1, freq: 5000 });
  
-  var alertTemperatureF = 85;
-  var currentTemp;
+  var led2 = new j5.Led(PROBE2LED);
+  var probe2 = new j5.Sensor({ pin: PROBE2, freq: 5000 });
+
+  var alertTempProbe1 = 85;
+  var currentTempProbe1;
  
-  thm.on("change",  function(err, thmVoltage){
-    currentTemp = convertVoltToTemp(thmVoltage);
+  var alertTempProbe2 = 85;
+  var currentTempProbe2;
+
+  probe1.on("change",  function(err, thmVoltage){
+    currentTempProbe1 = convertVoltToTemp(thmVoltage);
  
-    if (currentTemp.tempF >= alertTemperatureF) {
-      led.on();
+    if (currentTempProbe1.tempF >= alertTempProbe1) {
+      led1.on();
     } else {
-      led.off();
+      led1.off();
     }
  
-    console.log("Current TempF: ", currentTemp.tempF);
+    console.log("Current TempF: ", currentTempProbe1.tempF);
+  });
+
+  probe2.on("change",  function(err, thmVoltage){
+    currentTempProbe2 = convertVoltToTemp(thmVoltage);
+
+    if (currentTempProbe2.tempF >= alertTempProbe2) {
+      led2.on();
+    } else {
+      led2.off();
+    }
+
+    console.log("Current TempF: ", currentTempProbe2.tempF);
   });
  
 }); 
