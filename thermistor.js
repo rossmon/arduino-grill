@@ -11,9 +11,7 @@ board.on("ready", function(){
   var thm = new j5.Sensor({ pin: THMPIN, freq: 500 });
   var currentTemp;
 
-  console.log("here 1"); 
   thm.on("change",  function(err, thmVoltage){
-    console.log("here 2");
     currentTemp = convertVoltToTemp(thmVoltage);
     
     console.log("Current TempF: ", currentTemp.tempF);
