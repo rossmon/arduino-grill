@@ -3,22 +3,27 @@ var board = new j5.Board();
  
 var LEDPIN = 8;
 var THMPIN = "A0";
- 
+
 board.on("ready", function(){
-  console.log("started this");
-  
   var led = new j5.Led(LEDPIN);
   var thm = new j5.Sensor({ pin: THMPIN, freq: 500 });
+ 
+  var alertTemperatureF = 85;
   var currentTemp;
-
+ 
   thm.on("change",  function(err, thmVoltage){
     currentTemp = convertVoltToTemp(thmVoltage);
-    
+ 
+    if (currentTemp.tempF >= alertTemperatureF) {
+      led.on();
+    } else {
+      led.off();
+    }
+ 
     console.log("Current TempF: ", currentTemp.tempF);
-    // do stuff w/ the temperature, here
   });
  
-});
+}); 
 
 function convertVoltToTemp(volt){
   var tempK, tempC, tempF;
