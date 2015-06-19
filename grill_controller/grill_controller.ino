@@ -122,9 +122,9 @@ double convertVoltToTemp(double volt){
 void postTempReading(double temp,int probe_num) {
 
   data=String("temp[device_id]=Device1");
-  data.concat(" temp[probe_num]=");
+  data.concat("&temp[probe_num]=");
   data.concat(probe_num);
-  data.concat(" temp[temperature]=");
+  data.concat("&temp[temperature]=");
   char tempstr[10];
   dtostrf(temp,2,1,tempstr);
   data.concat(tempstr);
@@ -136,14 +136,14 @@ void postTempReading(double temp,int probe_num) {
   if (client.connect(server, 80)) {
     Serial.println("connected to server");
     
-    client.println("GET / HTTP/1.1");
-    client.println();
-    //client.println("POST /app.rb HTTP/1.1");
-    //client.println("Host: wifi-grill.herokuapp.com");
-    //client.println("Content-Type: application/x-www-form-urlencoded");
-    //client.println(data.length());
+    //client.println("GET / HTTP/1.1");
     //client.println();
-    //client.print(data);
+    client.println("POST / HTTP/1.1");
+    client.println("Host: wifi-grill.herokuapp.com");
+    client.println("Content-Type: application/x-www-form-urlencoded");
+    client.println(data.length());
+    client.println();
+    client.print(data);
   }
   else {
     Serial.println("No connection made"); 
