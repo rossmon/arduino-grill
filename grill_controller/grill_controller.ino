@@ -5,7 +5,7 @@
 char ssid[] = "University";     //  your network SSID (name) 
 char pass[] = "thugmansion";    // your network password
 int status = WL_IDLE_STATUS;     // the Wifi radio's status
-char server[] = "wifi-grill.herokuapp.com";    // name address for Google (using DNS)
+char server[] = "https://wifi-grill.herokuapp.com";    // name address for Google (using DNS)
 
 WiFiClient client;
 
@@ -43,14 +43,14 @@ void setup() {
     Serial.println("Connected to network");
   }
 
-  Serial.println("\nStarting connection to server...");
+//  Serial.println("\nStarting connection to server...");
   // if you get a connection, report back via serial:
-  if (client.connect(server, 80)) {
-    Serial.println("connected to server");
-  }
-  else {
-    Serial.println("No connection made"); 
-  }
+//  if (client.connect(server, 80)) {
+//    Serial.println("connected to server");
+//  }
+ // else {
+   // Serial.println("No connection made"); 
+  //}
 
   data = "";
 
@@ -139,7 +139,7 @@ void postTempReading(double temp,int probe_num) {
     //client.println("GET / HTTP/1.1");
     //client.println();
     client.println("POST / HTTP/1.1");
-    client.println("Host: wifi-grill.herokuapp.com");
+    client.println("Host: https://wifi-grill.herokuapp.com");
     client.println("Content-Type: application/x-www-form-urlencoded");
     client.println(data.length());
     client.println();
