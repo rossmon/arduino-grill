@@ -2,7 +2,7 @@
 #include <WiFi.h>
 #include <LiquidCrystal.h>
 
-LiquidCrystal lcd(12, 11, 4, 5, 6, 7);
+LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
 
 //WIFI SETUP
 char ssid[] = "University";     //  your network SSID (name) 
